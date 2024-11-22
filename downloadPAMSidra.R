@@ -6,11 +6,11 @@
 #'
 #' @param variable A string representing the SIDRA variable code. Possible values are 'planted_area', 'harvested_area', 'production', 'average_yield'.
 #' @param start_year An integer representing the start year for the data retrieval.
-#' @param end_year An integer representing the end year for the data retrieval. As of August 2024, the latest year with available PAM data is 2022.
+#' @param end_year An integer representing the end year for the data retrieval. As of November 2024, the latest year with available PAM data is 2023.
 #'
 #' @return A data.table containing the agricultural data for all municipalities.
 #' @examples
-#' sidra_data <- downloadPAMSidra('planted_area', 2022)
+#' sidra_data <- downloadPAMSidra('planted_area', 1998,2022)
 #' head(sidra_data)
 #'
 
