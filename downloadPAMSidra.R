@@ -14,11 +14,6 @@
 #' head(sidra_data)
 #'
 
-# Load necessary libraries
-library(httr)
-library(rjson)
-library(data.table)
-
 # Load the municipality codes from the RDS file
 cd_mun <- readRDS("data/br_cd_mun.rds")
 

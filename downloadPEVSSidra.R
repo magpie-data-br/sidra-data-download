@@ -12,12 +12,6 @@
 #' sidra_data <- downloadPEVSSidra(1998, 2022)
 #' head(sidra_data)
 #'
-
-# Load required libraries
-library(httr)      # For HTTP requests
-library(rjson)     # For JSON parsing
-library(data.table) # For efficient data manipulation
-
 # Load municipality codes from a pre-saved RDS file
 cd_mun <- readRDS("data/br_cd_mun.rds")
 
