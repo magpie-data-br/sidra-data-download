@@ -3,23 +3,43 @@
 #' This function retrieves agricultural production data from IBGE's SIDRA API (PEVS) 
 #' for a specified list of municipalities over a given time period.
 #'
-#' @param start_year An integer representing the start year for data retrieval.
-#' @param end_year An integer representing the end year for data retrieval. 
-#'                As of November 2024, the latest available year is 2023.
+#' @param year_list A vector of integers representing the years for which data will be retrieved (e.g., c(1998, 2000, 2005) or year_list <- seq(from = start_year, to = end_year, by = 1)). As of November 2024, the latest year with available PAM data is 2023.
 #'
 #' @return A data.table containing agricultural production data for the specified municipalities and years.
 #' @examples
-#' sidra_data <- downloadPEVSSidra(1998, 2022)
+#' sidra_data <- downloadPEVSSidra(1998) 
+#' sidra_data <- downloadPEVSSidra(c(1998,2002))
+#' yearlist <- seq(from = 2000, to = 2020, by = 5)
+#' sidra_data <- downloadPEVSSidra(yearlist) 
 #' head(sidra_data)
 #'
 # Load municipality codes from a pre-saved RDS file
 cd_mun <- readRDS("data/br_cd_mun.rds")
 
 # Function to download PEVS data
-downloadPEVSSidra <- function(start_year, end_year) {
+downloadPEVSSidra <- function(year_list) {
   
-  # Generate a sequence of years from start_year to end_year
-  year_list <- seq(from = start_year, to = end_year, by = 1)
+  # Validate if 'year_list' is a numeric vector of integers
+  if (!is.numeric(year_list) || any(year_list != as.integer(year_list))) {
+    stop("The 'year_list' parameter must be a numeric vector of integers.")
+  }
+  
+  # Validate the range of years
+  valid_years <- 1998:2023
+  if (any(!year_list %in% valid_years)) {
+    stop("All years in 'year_list' must be within the range 1998 to 2023.")
+  }
+  
+  # Remove duplicates and issue a warning, if necessary
+  if (length(year_list) != length(unique(year_list))) {
+    warning("Duplicate years were removed from 'year_list'.")
+    year_list <- unique(year_list)
+  }
+  
+  # Check if the year list is not empty
+  if (length(year_list) == 0) {
+    stop("'year_list' cannot be empty. Please provide at least one valid year.")
+  }
   
   # List to store data for all years and municipalities
   list_of_data <- list()
@@ -90,8 +110,16 @@ downloadPEVSSidra <- function(start_year, end_year) {
   # Combine data for all years into a single data.table
   final_data <- rbindlist(list_of_data, use.names = TRUE, fill = TRUE)
   
+  if (length(year_list) == 1) {
+    # Single year: include only the year in the file name
+    rds_file_name_final <- paste0("PEVS_data_", "production", "_", year_list, ".rds")
+  } else {
+    # Multiple years: include the range in the file name
+    year_start <- min(year_list)
+    year_end <- max(year_list)
+    rds_file_name_final <- paste0("PEVS_data_", "production", "_", year_start, "_to_", year_end, ".rds")
+  }   
   # Save the combined data as an RDS file
-  rds_file_name_final <- paste0("PEVS_data_", "production", ".rds")
   saveRDS(final_data, file = rds_file_name_final)
   
   # Return the aggregated data
