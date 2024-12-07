@@ -47,8 +47,14 @@ Before using these scripts, ensure that you have the following:
   ```bash
     install.packages(c("httr", "rjson", "data.table"))
    ```
-
-
+   or 
+   ```bash
+     required_packages <- c("httr", "rjson", "data.table")
+     missing_packages <- setdiff(required_packages, installed.packages()[, "Package"])
+     if (length(missing_packages) > 0) {
+       install.packages(missing_packages)
+      }
+ ```
 ---
 ###  Usage
 Each function downloads data for a specific dataset. Examples for using these functions are provided below.
@@ -76,9 +82,9 @@ Download data for crop production/area by municipality:
       # Preview the first rows
       head(pam_data)
 
-      # The data is saved automatically as 'PAM_data_harvested_area_'yearstart'_'yearend'.rds'
-      # The data is saved automatically as 'PAM_data_planted_area_'yearstart'_'yearend'.rds'
-      # The data is saved automatically as 'PAM_data_production_'yearstart'_'yearend'.rds'
+      # The data is saved automatically as 'PAM_data_harvested_area_<yearstart>_<yearend>.rds'
+      # The data is saved automatically as 'PAM_data_planted_area_<yearstart>_<yearend>.rds'
+      # The data is saved automatically as 'PAM_data_production_<yearstart>_<yearend>.rds'
       
   ```
 
@@ -98,7 +104,7 @@ Download data for livestock population by municipality:
       # Preview the first rows
         head(ppm_data)
 
-      # The data is saved automatically as 'PPM_data_livestock.rds'
+      # The data is saved automatically as 'PPM_data_livestock_<yearstart>_<yearend>.rds'
   ```
 
 ### 3. PEVS: Survey on Plant Extraction and Forestry
@@ -117,7 +123,7 @@ Download data for plant extraction and forestry production:
       # Preview the first rows
         head(pevs_data)
 
-      # The data is saved automatically as 'PEVS_data_production.rds'
+      # The data is saved automatically as 'PEVS_data_production_<yearstart>_<yearend>.rds'
   ```
 ---
 ###  Outputs
