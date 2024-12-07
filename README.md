@@ -44,8 +44,8 @@ Before using these scripts, ensure that you have the following:
 2. Open the R scripts (downloadPAMSidra.R, downloadPPMSidra.R, downloadPEVSSidra.R) in your preferred R environment.
 
 3. Install the required R packages:
-  ```bash
-    install.packages(c("httr", "rjson", "data.table"))
+   ```bash
+   install.packages(c("httr", "rjson", "data.table"))
    ```
    or 
    ```bash
@@ -54,7 +54,7 @@ Before using these scripts, ensure that you have the following:
      if (length(missing_packages) > 0) {
        install.packages(missing_packages)
       }
- ```
+   ```
 ---
 ###  Usage
 Each function downloads data for a specific dataset. Examples for using these functions are provided below.
@@ -125,6 +125,10 @@ Download data for plant extraction and forestry production:
 
       # The data is saved automatically as 'PEVS_data_production_<yearstart>_<yearend>.rds'
   ```
+
+### 4. Example Script: main_examples.R
+A consolidated script (main_examples.R) is provided for a quick demonstration of how to use all the download functions in a structured workflow.
+
 ---
 ###  Outputs
 Each function generates:
