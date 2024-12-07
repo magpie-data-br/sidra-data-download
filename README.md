@@ -54,18 +54,32 @@ Before using these scripts, ensure that you have the following:
 Each function downloads data for a specific dataset. Examples for using these functions are provided below.
 
 ### 1. PAM: Municipal Agricultural Production
-Download data for crop production by municipality:
+Download data for crop production/area by municipality:
 
   ```bash
      # Load the function
         source("downloadPAMSidra.R")
 
+     # Create a list of years
+      yearList <- seq(from = 1998, to = 2023, by = 1)
+
       # Download data for the years 2000 to 2023
+      # Planted area
+        pam_data <- downloadPAMSidra('planted_area',yearList)
+
+      # Harvested area
+        pam_data <- downloadPAMSidra('harvested_area',yearList)
+
+      # Production
+        pam_data <- downloadPAMSidra('production',yearList)
 
       # Preview the first rows
       head(pam_data)
 
-      # The data is saved automatically as 'PAM_data_crop_production.rds'
+      # The data is saved automatically as 'PAM_data_harvested_area_'yearstart'_'yearend'.rds'
+      # The data is saved automatically as 'PAM_data_planted_area_'yearstart'_'yearend'.rds'
+      # The data is saved automatically as 'PAM_data_production_'yearstart'_'yearend'.rds'
+      
   ```
 
 ###  2. PPM: Municipal Livestock Production
@@ -74,9 +88,12 @@ Download data for livestock population by municipality:
   ```bash
       # Load the function
         source("downloadPPMSidra.R")
+
+      # Create a list of years
+       yearList <- seq(from = 1998, to = 2023, by = 1)
   
-      # Download data for the years 2005 to 2023
-        ppm_data <- downloadPPMSidra(2005, 2023)
+      # Download data for the years 1998 to 2023
+        ppm_data <- downloadPPMSidra(yearList)
 
       # Preview the first rows
         head(ppm_data)
@@ -91,8 +108,11 @@ Download data for plant extraction and forestry production:
       # Load the function
         source("downloadPEVSSidra.R")
 
-      # Download data for the years 1998 to 2022
-        pevs_data <- downloadPEVSSidra(1998, 2022)
+      # Create a list of years
+       yearList <- seq(from = 1998, to = 2023, by = 1)
+
+      # Download data for the years 1998 to 2023
+        pevs_data <- downloadPEVSSidra(yearList)
 
       # Preview the first rows
         head(pevs_data)
