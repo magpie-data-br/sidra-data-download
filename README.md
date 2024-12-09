@@ -135,9 +135,9 @@ Each function generates:
 
 A combined dataset as an R data.table object.
 A saved .rds file with the following naming conventions:
-PAM: PAM_data_production_<yearstart>_<yearend>.rds, PAM_data_harvested_area_<yearstart>_<yearend>.rds, PAM_data_planted_area_<yearstart>_<yearend>.rds
-PPM: PPM_data_livestock_<yearstart>_<yearend>.rds
-PEVS: PEVS_data_production_<yearstart>_<yearend>.rds
+PAM: PAM_data_production_yearstart_yearend.rds, PAM_data_harvested_area_yearstart_yearend.rds, PAM_data_planted_area_yearstart_yearend.rds
+PPM: PPM_data_livestock_yearstart_yearend.rds
+PEVS: PEVS_data_production_yearstart_yearend.rds
 These files are saved in the working directory.
 
 ---
